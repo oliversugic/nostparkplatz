@@ -1,10 +1,10 @@
-= Nost Prüfung Verwaltung - Pelzeder Sugic Binder Tran
+# Nost Prüfung Verwaltung - Pelzeder Sugic Binder Tran
 
-== Modell
+## Modell
 
 ![alt test](docs/modell.png)
 
-== User-stories
+## User-stories
 
 * The Student should be able to browse his history of Nostprüfungen.
 * The Student should be able to register for a Nostprüfung.
