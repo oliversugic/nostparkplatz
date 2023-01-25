@@ -1,0 +1,11 @@
+= Nost Prüfung Verwaltung - Pelzeder Sugic Binder Tran
+
+== Modell
+
+plantuml::modell.puml[format=svg,align="center"]
+
+== User-stories
+
+* The Student should be able to browse his history of Nostprüfungen.
+* The Student should be able to register for a Nostprüfung.
+* The Student should be to view his Exams, which are lie on the Parkplatz
