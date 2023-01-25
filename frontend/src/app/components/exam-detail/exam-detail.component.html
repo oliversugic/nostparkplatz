@@ -1,0 +1,22 @@
+<div class="container justify-content-center" style="display: flex;">
+    <h1>Deatil</h1>
+</div>
+
+<div class="m-3">
+    <input placeholder="Prüfung suchen" type="text" class="form-control search-field" [(ngModel)]="searchText">
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Competences</th>
+            <th>Subject</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let comp of competences | searchFilter: searchText">
+            <td>{{comp.description}}</td>
+            <td>{{comp.subject.name}}</td>
+        </tr>
+    </tbody>
+</table>
