@@ -4,6 +4,7 @@ import { Subject } from "./subject.model"
 import { Teacher } from "./teacher.model"
 
 export interface Exam {
+    id:number,
     student: Student,
     teacher: Teacher,
     subject: Subject,

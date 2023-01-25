@@ -1,28 +1,30 @@
-<div class="container justify-content-center" style="display: flex;">
-    <h1>Nostprüfungen</h1>
-</div>
+<div class="container">
+    <div class="container justify-content-center" style="display: flex;">
+        <h1>Nostprüfungen</h1>
+    </div>
 
-<div class="m-3">
-    <input placeholder="Prüfung suchen" type="text" class="form-control search-field" [(ngModel)]="searchText">
-</div>
+    <div class="m-3">
+        <input placeholder="Prüfung suchen" type="text" class="form-control search-field" [(ngModel)]="searchText">
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Teacher</th>
-            <th>Student</th>
-            <th>Date</th>
-            <th>Attempt Nr.</th>
-            <th>Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let exam of exams | searchFilter: searchText">
-            <td>{{exam.teacher.name}}</td>
-            <td>{{exam.student.name}}</td>
-            <td>{{exam.date}}</td>
-            <td>{{exam.attempt}}</td>
-            <td><button class="btn btn-primary">Details</button></td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Teacher</th>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Attempt Nr.</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let exam of exams | searchFilter: searchText">
+                <td>{{exam.teacher.name}}</td>
+                <td>{{exam.student.name}}</td>
+                <td>{{exam.date}}</td>
+                <td>{{exam.attempt}}</td>
+                <td><button class="btn btn-primary" [routerLink]="['/details/', exam.id]">Details</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
