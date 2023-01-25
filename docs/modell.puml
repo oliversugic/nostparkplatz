@@ -1,4 +1,7 @@
 @startuml
+
+left to right direction
+
 class Student{
     - firstName: String
     - lastName: String
@@ -11,10 +14,9 @@ class Teacher {
 
 class Subject {
     - name: String
-    - List<competence> competence: List<competence>
 }
 class Competence {
-    - String competences: String
+    - String subject: Subject
     - String description: String
 }
 
@@ -29,10 +31,12 @@ class Exam{
     - List<Competence> competence: List<Competence>
 }
 
-
 Student "1" -- "1..1" Exam
+
 Teacher "1" -- "1..1" Exam
-Subject "1" -- "1..1" Exam
+
+Exam "1" -- "1..1" Competence
+
 Subject "1" -- "1..*" Competence
 
 @enduml
