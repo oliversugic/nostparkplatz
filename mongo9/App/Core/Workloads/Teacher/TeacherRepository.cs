@@ -7,30 +7,28 @@ namespace MongoDBDemoApp.Core.Workloads.Teacher;
 
 public sealed class TeacherRepository: RepositoryBase<Teacher>, ITeacherRepository
 {
-    public override string CollectionName { get; } = MongoUtil.GetCollectionName<Teacher>();
-    
-    public Task<Teacher> AddStudent(Teacher comment)
+    public TeacherRepository(ITransactionProvider transactionProvider, IDatabaseProvider databaseProvider) : base(transactionProvider, databaseProvider)
+    {
+    }
+
+    public override string CollectionName { get; } = default!;
+    public Task<Teacher> AddTeacher(Teacher teacher)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Teacher?> GetStudentById(ObjectId id)
+    public Task<Teacher?> GetTeacherById(ObjectId id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IReadOnlyCollection<Teacher>> GetAllStudents()
+    public Task<IReadOnlyCollection<Teacher>> GetAllTeachers()
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteStudent(ObjectId postId)
+    public Task DeleteTeacher(ObjectId teacherId)
     {
         throw new NotImplementedException();
-    }
-
-    public TeacherRepository(ITransactionProvider transactionProvider,
-        IDatabaseProvider databaseProvider) : base(transactionProvider, databaseProvider)
-    {
     }
 }
