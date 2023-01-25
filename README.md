@@ -2,7 +2,7 @@
 
 == Modell
 
-plantuml::modell.puml[format=svg,align="center"]
+![alt test](docs/modell.png)
 
 == User-stories
 
