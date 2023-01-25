@@ -2,7 +2,6 @@
 using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
-using MongoDBDemoApp.Core.Workloads.Comments;
 
 namespace MongoDBDemoApp.Core.Workloads.Student
 {

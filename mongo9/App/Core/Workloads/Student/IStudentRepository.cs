@@ -1,6 +1,5 @@
 ﻿using LeoMongo.Database;
 using MongoDB.Bson;
-using MongoDBDemoApp.Core.Workloads.Comments;
 
 namespace MongoDBDemoApp.Core.Workloads.Student
 {

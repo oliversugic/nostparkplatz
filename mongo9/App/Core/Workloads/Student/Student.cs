@@ -6,6 +6,5 @@ namespace MongoDBDemoApp.Core.Workloads.Student
     {
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
-
     }
 }
