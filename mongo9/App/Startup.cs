@@ -30,15 +30,15 @@ public class Startup
         // for bigger assemblies it would be alright to register those via reflection by naming convention!
         services.AddScoped<ICompetenceRepository, CompetenceRepository>();
         services.AddScoped<ICompetenceService, CompetenceService>();
+        services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<ITeacherService, TeacherService>();
         services.AddScoped<IExamRepository, ExamRepository>();
         services.AddScoped<IExamService, ExamService>();
         services.AddScoped<IStudentRepository, StudentRepository>();
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<ISubjectRepository, SubjectRepository>();
         services.AddScoped<ISubjectService, SubjectService>();
-        services.AddScoped<ITeacherRepository, TeacherRepository>();
-        services.AddScoped<ITeacherService, TeacherService>();
-        
+
 
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 

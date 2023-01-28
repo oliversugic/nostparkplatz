@@ -2,6 +2,8 @@
 using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace MongoDBDemoApp.Core.Workloads.Teacher;
 
@@ -11,24 +13,25 @@ public sealed class TeacherRepository: RepositoryBase<Teacher>, ITeacherReposito
     {
     }
 
-    public override string CollectionName { get; } = default!;
-    public Task<Teacher> AddTeacher(Teacher teacher)
+    public override string CollectionName { get; } =  MongoUtil.GetCollectionName<Teacher>();
+    public async Task<Teacher> AddTeacher(Teacher teacher)
     {
-        throw new NotImplementedException();
+        return await this.InsertOneAsync(teacher);
     }
 
-    public Task<Teacher?> GetTeacherById(ObjectId id)
+    public async Task<Teacher?> GetTeacherById(ObjectId id)
     {
-        throw new NotImplementedException();
+        var c = await this.Query().Where(g => g.Id == id).FirstAsync();
+        return c;
     }
 
-    public Task<IReadOnlyCollection<Teacher>> GetAllTeachers()
+    public async Task<IReadOnlyCollection<Teacher>> GetAllTeachers()
     {
-        throw new NotImplementedException();
+        return await this.Query().ToListAsync();
     }
 
     public Task DeleteTeacher(ObjectId teacherId)
     {
-        throw new NotImplementedException();
+        return this.DeleteOneAsync(teacherId);
     }
 }
