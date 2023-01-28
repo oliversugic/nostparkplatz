@@ -6,7 +6,8 @@ namespace MongoDBDemoApp.Core.Workloads.Competence;
 
 public sealed class CompetenceRepository: RepositoryBase<Competence>, ICompetenceRepository
 {
-    public CompetenceRepository(ITransactionProvider transactionProvider, IDatabaseProvider databaseProvider) : base(transactionProvider, databaseProvider)
+    public CompetenceRepository(ITransactionProvider transactionProvider, 
+        IDatabaseProvider databaseProvider) : base(transactionProvider, databaseProvider)
     {
     }
 

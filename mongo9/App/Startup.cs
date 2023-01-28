@@ -1,7 +1,10 @@
 using LeoMongo;
 using MongoDBDemoApp.Core.Util;
-using MongoDBDemoApp.Core.Workloads.Comments;
-using MongoDBDemoApp.Core.Workloads.Posts;
+using MongoDBDemoApp.Core.Workloads.Competence;
+using MongoDBDemoApp.Core.Workloads.Exam;
+using MongoDBDemoApp.Core.Workloads.Student;
+using MongoDBDemoApp.Core.Workloads.Subject;
+using MongoDBDemoApp.Core.Workloads.Teacher;
 
 namespace MongoDBDemoApp;
 
@@ -25,10 +28,17 @@ public class Startup
         services.AddLeoMongo<MongoConfig>();
 
         // for bigger assemblies it would be alright to register those via reflection by naming convention!
-        services.AddScoped<IPostRepository, PostRepository>();
-        services.AddScoped<IPostService, PostService>();
-        services.AddScoped<ICommentRepository, CommentRepository>();
-        services.AddScoped<ICommentService, CommentService>();
+        services.AddScoped<ICompetenceRepository, CompetenceRepository>();
+        services.AddScoped<ICompetenceService, CompetenceService>();
+        services.AddScoped<IExamRepository, ExamRepository>();
+        services.AddScoped<IExamService, ExamService>();
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<ISubjectRepository, SubjectRepository>();
+        services.AddScoped<ISubjectService, SubjectService>();
+        services.AddScoped<ITeacherRepository, TeacherRepository>();
+        services.AddScoped<ITeacherService, TeacherService>();
+        
 
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 

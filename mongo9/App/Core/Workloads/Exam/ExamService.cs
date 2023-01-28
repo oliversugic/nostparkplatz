@@ -1,6 +1,6 @@
 ﻿namespace MongoDBDemoApp.Core.Workloads.Exam;
 
-public class ExamService
+public class ExamService : IExamService
 {
     
 }

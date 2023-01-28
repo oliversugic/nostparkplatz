@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace MongoDBDemoApp.Core.Workloads.Exam;
 
-public class ExamRepository : RepositoryBase<Exam>, IExamRepository
+public sealed class ExamRepository : RepositoryBase<Exam>, IExamRepository
 {
     
     public ExamRepository(ITransactionProvider transactionProvider,
