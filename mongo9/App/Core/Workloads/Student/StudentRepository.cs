@@ -2,6 +2,8 @@
 using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace MongoDBDemoApp.Core.Workloads.Student
 {
@@ -21,17 +23,18 @@ namespace MongoDBDemoApp.Core.Workloads.Student
 
         public Task DeleteStudent(ObjectId postId)
         {
-            throw new NotImplementedException();
+            return this.DeleteOneAsync(postId);
         }
 
-        public Task<IReadOnlyCollection<Student>> GetAllStudents()
+        public async Task<IReadOnlyCollection<Student>> GetAllStudents()
         {
-            throw new NotImplementedException();
+            return await Query().ToListAsync();
         }
 
-        public Task<Student?> GetStudentById(ObjectId id)
+        public async Task<Student?> GetStudentById(ObjectId id)
         {
-            throw new NotImplementedException();
+            var c = await Query().Where(g => g.Id == id).FirstAsync();
+            return c;
         }
     }
 }
