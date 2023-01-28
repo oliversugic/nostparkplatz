@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDBDemoApp.Core.Util;
 using MongoDBDemoApp.Core.Workloads.Student;
-using MongoDBDemoApp.Model.Comment;
 using MongoDBDemoApp.Model.Student;
 
 namespace MongoDBDemoApp.Controllers;
@@ -71,7 +70,7 @@ public sealed class StudentController : ControllerBase
     /// <param name="id">existing student id</param>
     /// <returns>a student</returns>
     [HttpGet]
-    public async Task<ActionResult<CommentDto>> GetById(string id)
+    public async Task<ActionResult<StudentDTO>> GetById(string id)
     {
         Student? student;
         if (string.IsNullOrWhiteSpace(id)
