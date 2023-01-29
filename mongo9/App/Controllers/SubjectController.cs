@@ -80,4 +80,45 @@ public sealed class SubjectController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = subject.Id.ToString() }, subject);
     }
 
+    /// <summary>
+    ///     Removes the subject identified by the given id.
+    ///     If the id does not exist nothing will be changed.
+    /// </summary>
+    /// <param name="id">if of an existing subject</param>
+    [HttpDelete]
+    public async Task<IActionResult> Delete(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return BadRequest();
+        }
+
+        using var transaction = await _transactionProvider.BeginTransaction();
+        await _service.DeleteSubject(id);
+        await transaction.CommitAsync();
+        return Ok();
+    }
+    
+    /// <summary>
+    ///     Returns the updated object
+    /// </summary>
+    /// <param name="id">Object with updates</param>
+    /// <returns>a subject</returns>
+    [HttpPut]
+    public async Task<ActionResult<SubjectDTO>> Update([FromBody] SubjectDTO request)
+    {
+        Subject? subject;
+        if (string.IsNullOrWhiteSpace(request.Name)
+            || (subject = await _service.GetSubjectById(new ObjectId(request.Id))) == null)
+        {
+            return BadRequest();
+        }
+        
+        using var transaction = await _transactionProvider.BeginTransaction();
+        subject.Name = request.Name;
+        Subject updated = await _service.Update(subject);
+        await transaction.CommitAsync();
+        
+        return Ok(_mapper.Map<SubjectDTO>(updated));
+    }
 }

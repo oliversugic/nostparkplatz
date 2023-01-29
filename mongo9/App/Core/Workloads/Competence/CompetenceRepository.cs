@@ -53,4 +53,11 @@ public sealed class CompetenceRepository: RepositoryBase<Competence>, ICompetenc
         var c = await Query().Where(g => g.SubjectId == subjectId).ToListAsync();
         return c;
     }
+
+    public Task DeleteCompetencesBySubject(ObjectId id)
+    {
+        var d = Query().Where(g => id == g.SubjectId).ToListAsync();
+        d.Result.ForEach(g=>this.DeleteOneAsync(g.Id));
+        return d;
+    }
 }

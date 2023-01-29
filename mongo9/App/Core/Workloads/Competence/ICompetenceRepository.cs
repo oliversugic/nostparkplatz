@@ -1,8 +1,9 @@
-﻿using MongoDB.Bson;
+﻿using LeoMongo.Database;
+using MongoDB.Bson;
 
 namespace MongoDBDemoApp.Core.Workloads.Competence;
 
-public interface ICompetenceRepository
+public interface ICompetenceRepository : IRepositoryBase
 {
     Task<Competence> AddCompetence(Competence comment);
     Task<Competence?> GetCompetenceById(ObjectId id);
@@ -10,4 +11,5 @@ public interface ICompetenceRepository
     Task DeleteCompetence(ObjectId competenceId);
     Task<Competence> Update(Competence competence);
     Task<IReadOnlyCollection<Competence>?> GetCompetencesForSubject(ObjectId subjectId);
+    Task DeleteCompetencesBySubject(ObjectId id);
 }
