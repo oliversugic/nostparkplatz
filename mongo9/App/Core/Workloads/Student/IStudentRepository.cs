@@ -9,5 +9,6 @@ namespace MongoDBDemoApp.Core.Workloads.Student
         Task<Student?> GetStudentById(ObjectId id);
         Task<IReadOnlyCollection<Student>> GetAllStudents();
         Task DeleteStudent(ObjectId postId);
+        Task<Student> Update(Student student);
     }
 }

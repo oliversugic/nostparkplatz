@@ -34,4 +34,14 @@ public sealed class TeacherRepository: RepositoryBase<Teacher>, ITeacherReposito
     {
         return this.DeleteOneAsync(teacherId);
     }
+
+    public async Task<Teacher> Update(Teacher teacher)
+    {
+        await this.UpdateOneAsync(teacher.Id, 
+            Builders<Teacher>.Update.Set(p => p.FirstName, teacher.FirstName));
+        await this.UpdateOneAsync(teacher.Id,
+            Builders<Teacher>.Update.Set(p => p.LastName, teacher.LastName));
+        Teacher updated = await Query().Where(g => g.Id == teacher.Id).FirstAsync();
+        return updated;
+    }
 }

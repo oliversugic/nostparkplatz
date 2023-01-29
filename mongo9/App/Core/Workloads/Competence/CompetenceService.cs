@@ -34,4 +34,9 @@ public class CompetenceService: ICompetenceService
     {
         await _repository.DeleteCompetence(id);
     }
+
+    public async Task<Competence> Update(Competence competence)
+    {
+        return await _repository.Update(competence);
+    }
 }

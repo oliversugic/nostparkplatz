@@ -102,4 +102,28 @@ public sealed class TeacherController : ControllerBase
         await transaction.CommitAsync();
         return CreatedAtAction(nameof(GetById), new { id = teacher.Id.ToString() }, teacher);
     }
+    
+    /// <summary>
+    ///     Returns the updated object
+    /// </summary>
+    /// <param name="id">Object with updates</param>
+    /// <returns>a teacher</returns>
+    [HttpPut]
+    public async Task<ActionResult<TeacherDTO>> Update([FromBody] TeacherDTO request)
+    {
+        Teacher? teacher;
+        if (string.IsNullOrWhiteSpace(request.FirstName)
+            || string.IsNullOrWhiteSpace(request.LastName)
+            || (teacher = await _service.GetTeacherById(new ObjectId(request.Id))) == null)
+        {
+            return BadRequest();
+        }
+        
+        using var transaction = await _transactionProvider.BeginTransaction();
+        teacher.FirstName = request.FirstName;
+        teacher.LastName = request.LastName;
+        Teacher updated = await _service.Update(teacher);
+        await transaction.CommitAsync();
+        return Ok(_mapper.Map<TeacherDTO>(updated));
+    }
 }

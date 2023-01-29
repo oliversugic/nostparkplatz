@@ -8,4 +8,5 @@ public interface ITeacherService
     Task<Teacher?> GetTeacherById(ObjectId id);
     Task<Teacher> AddTeacher(string firstName, string lastName);
     Task DeleteTeacher(ObjectId id);
+    Task<Teacher> Update(Teacher teacher);
 }

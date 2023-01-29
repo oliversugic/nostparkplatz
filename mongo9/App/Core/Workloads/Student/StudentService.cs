@@ -35,5 +35,10 @@ namespace MongoDBDemoApp.Core.Workloads.Student
         {
             await _repository.DeleteStudent(id);
         }
+
+        public async Task<Student> Update(Student student)
+        {
+            return await _repository.Update(student);
+        }
     }
 }

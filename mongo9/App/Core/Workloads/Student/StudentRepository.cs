@@ -26,6 +26,16 @@ namespace MongoDBDemoApp.Core.Workloads.Student
             return this.DeleteOneAsync(postId);
         }
 
+        public async Task<Student> Update(Student student)
+        {
+            await this.UpdateOneAsync(student.Id, 
+                Builders<Student>.Update.Set(p => p.FirstName, student.FirstName));
+            await this.UpdateOneAsync(student.Id,
+                Builders<Student>.Update.Set(p => p.LastName, student.LastName));
+            Student updated = await Query().Where(g => g.Id == student.Id).FirstAsync();
+            return updated;
+        }
+
         public async Task<IReadOnlyCollection<Student>> GetAllStudents()
         {
             return await Query().ToListAsync();

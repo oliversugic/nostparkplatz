@@ -9,4 +9,5 @@ public interface ITeacherRepository: IRepositoryBase
     Task<Teacher?> GetTeacherById(ObjectId id);
     Task<IReadOnlyCollection<Teacher>> GetAllTeachers();
     Task DeleteTeacher(ObjectId teacherId);
+    Task<Teacher> Update(Teacher teacher);
 }

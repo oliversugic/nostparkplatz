@@ -102,4 +102,30 @@ public sealed class CompetenceController : ControllerBase
         await transaction.CommitAsync();
         return CreatedAtAction(nameof(GetById), new { id = competence.Id.ToString() }, competence);
     }
+    
+    
+    /// <summary>
+    ///     Returns the updated object
+    /// </summary>
+    /// <param name="id">Object with updates</param>
+    /// <returns>a competence</returns>
+    [HttpPut]
+    public async Task<ActionResult<CompetenceDTO>> Update([FromBody] CompetenceDTO request)
+    {
+        Competence? competence;
+        if (string.IsNullOrWhiteSpace(request.Compentences)
+            || string.IsNullOrWhiteSpace(request.Descripton)
+            || (competence = await _service.GetCompetenceById(new ObjectId(request.Id))) == null)
+        {
+            return BadRequest();
+        }
+        
+        using var transaction = await _transactionProvider.BeginTransaction();
+        competence.Descripton = request.Descripton;
+        competence.Compentences = request.Compentences;
+        Competence updatedCompetence = await _service.Update(competence);
+        await transaction.CommitAsync();
+        
+        return Ok(_mapper.Map<CompetenceDTO>(updatedCompetence));
+    }
 }

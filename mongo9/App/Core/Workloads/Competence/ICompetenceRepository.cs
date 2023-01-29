@@ -8,4 +8,5 @@ public interface ICompetenceRepository
     Task<Competence?> GetCompetenceById(ObjectId id);
     Task<IReadOnlyCollection<Competence>> GetAllCompetences();
     Task DeleteCompetence(ObjectId competenceId);
+    Task<Competence> Update(Competence competence);
 }

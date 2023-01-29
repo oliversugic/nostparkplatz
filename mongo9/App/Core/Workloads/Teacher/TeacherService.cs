@@ -35,4 +35,9 @@ public class TeacherService : ITeacherService
     {
         await _repository.DeleteTeacher(id);
     }
+
+    public async Task<Teacher> Update(Teacher teacher)
+    {
+        return await _repository.Update(teacher);
+    }
 }
