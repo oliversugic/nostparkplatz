@@ -1,6 +1,9 @@
-﻿using LeoMongo.Database;
+﻿using LeoMongo;
+using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace MongoDBDemoApp.Core.Workloads.Competence;
 
@@ -11,25 +14,26 @@ public sealed class CompetenceRepository: RepositoryBase<Competence>, ICompetenc
     {
     }
 
-    public override string CollectionName { get; } = default!;
+    public override string CollectionName { get; } =  MongoUtil.GetCollectionName<Competence>();
     
-    public Task<Competence> AddCompetence(Competence comment)
+    public async Task<Competence> AddCompetence(Competence comment)
     {
-        throw new NotImplementedException();
+        return await InsertOneAsync(comment);
     }
 
-    public Task<Competence?> GetCompetenceById(ObjectId id)
+    public async Task<Competence?> GetCompetenceById(ObjectId id)
     {
-        throw new NotImplementedException();
+        var c = await Query().Where(g => g.Id == id).FirstAsync();
+        return c;
     }
 
-    public Task<IReadOnlyCollection<Competence>> GetAllCompetences()
+    public async Task<IReadOnlyCollection<Competence>> GetAllCompetences()
     {
-        throw new NotImplementedException();
+        return await Query().ToListAsync();
     }
 
     public Task DeleteCompetence(ObjectId postId)
     {
-        throw new NotImplementedException();
+        return this.DeleteOneAsync(postId);
     }
 }
