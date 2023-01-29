@@ -42,7 +42,7 @@ public sealed class SubjectController : ControllerBase
                     pl.ForEach(p => p.Name = p.Name.Truncate(TeaserLength)));
             }));
     }
-    
+
     /// <summary>
     ///     Returns the subject identified by the given id if it exists.
     /// </summary>
@@ -57,7 +57,6 @@ public sealed class SubjectController : ControllerBase
         {
             return BadRequest();
         }
-
         return Ok(_mapper.Map<SubjectDTO>(subject));
     }
     

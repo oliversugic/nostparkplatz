@@ -9,4 +9,5 @@ public interface ICompetenceRepository
     Task<IReadOnlyCollection<Competence>> GetAllCompetences();
     Task DeleteCompetence(ObjectId competenceId);
     Task<Competence> Update(Competence competence);
+    Task<IReadOnlyCollection<Competence>?> GetCompetencesForSubject(ObjectId subjectId);
 }

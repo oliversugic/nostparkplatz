@@ -132,4 +132,24 @@ public sealed class CompetenceController : ControllerBase
         
         return Ok(_mapper.Map<CompetenceDTO>(updatedCompetence));
     }
+    
+    /// <summary>
+    ///     Returns all competences for the post with the given id.
+    /// </summary>
+    /// <param name="postId">id of an existing subject</param>
+    /// <returns>List of competences, may be empty</returns>
+    [HttpGet]
+    [Route("getCompetenceForSubject")]
+    public async Task<ActionResult<IReadOnlyCollection<CompetenceDTO>>> GetCompetencesForSubject(string postId)
+    {
+        Subject? subject;
+        if (string.IsNullOrWhiteSpace(postId) ||
+            (subject = await _subService.GetSubjectById(new(postId))) == null)
+        {
+            return BadRequest();
+        }
+
+        IReadOnlyCollection<Competence>? competences = await _service.GetCompetencesForSubject(subject);
+        return Ok(_mapper.Map<List<CompetenceDTO>>(competences));
+    }
 }

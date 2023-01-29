@@ -40,4 +40,7 @@ public class CompetenceService: ICompetenceService
     {
         return await _repository.Update(competence);
     }
+
+    public Task<IReadOnlyCollection<Competence>?> GetCompetencesForSubject(Subject.Subject subject)=>
+        _repository.GetCompetencesForSubject(subject.Id);
 }

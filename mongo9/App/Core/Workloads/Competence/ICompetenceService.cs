@@ -9,4 +9,5 @@ public interface ICompetenceService
     Task<Competence> AddCompetence(string id, string name, string description);
     Task DeleteCompetence(ObjectId id);
     Task<Competence> Update(Competence competence);
+    Task<IReadOnlyCollection<Competence>?> GetCompetencesForSubject(Subject.Subject subject);
 }

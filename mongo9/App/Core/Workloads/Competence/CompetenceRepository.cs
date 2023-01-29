@@ -47,4 +47,10 @@ public sealed class CompetenceRepository: RepositoryBase<Competence>, ICompetenc
         Competence updated = await Query().Where(g => g.Id == competence.Id).FirstAsync();
         return updated;
     }
+
+    public async Task<IReadOnlyCollection<Competence>?> GetCompetencesForSubject(ObjectId subjectId)
+    {
+        var c = await Query().Where(g => g.SubjectId == subjectId).ToListAsync();
+        return c;
+    }
 }
