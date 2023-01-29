@@ -1,6 +1,10 @@
-﻿using LeoMongo.Database;
+﻿using LeoMongo;
+using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+
 
 namespace MongoDBDemoApp.Core.Workloads.Exam;
 
@@ -12,25 +16,26 @@ public sealed class ExamRepository : RepositoryBase<Exam>, IExamRepository
     {
     }
 
-    public override string CollectionName { get; } = default!;
-    public Task<Exam> AddExam(Exam comment)
+    public override string CollectionName { get; } =  MongoUtil.GetCollectionName<Exam>();
+    public Task<Exam> AddExam(Exam exam)
     {
-        throw new NotImplementedException();
+        return this.InsertOneAsync(exam);
     }
 
-    public Task<Exam?> GetExamById(ObjectId id)
+    public async Task<Exam?> GetExamById(ObjectId id)
     {
-        throw new NotImplementedException();
+        Exam exam = await Query().Where(g => g.Id == id).FirstAsync();
+        return exam;
     }
 
-    public Task<IReadOnlyCollection<Exam>> GetAllExam()
+    public async Task<IReadOnlyCollection<Exam>> GetAllExam()
     {
-        throw new NotImplementedException();
+        return await Query().ToListAsync();
     }
 
     public Task DeleteExam(ObjectId examId)
     {
-        throw new NotImplementedException();
+        return Query().ToListAsync();
     }
 
 }
