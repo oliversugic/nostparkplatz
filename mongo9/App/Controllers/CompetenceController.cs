@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using MongoDBDemoApp.Core.Util;
 using MongoDBDemoApp.Core.Workloads.Competence;
 using MongoDBDemoApp.Core.Workloads.Student;
+using MongoDBDemoApp.Core.Workloads.Subject;
 using MongoDBDemoApp.Model.Competence;
 using MongoDBDemoApp.Model.Student;
 
@@ -17,10 +18,13 @@ public sealed class CompetenceController : ControllerBase
 {
     private readonly IMapper _mapper;
     private readonly ICompetenceService _service;
+    private readonly ISubjectService _subService;
     private readonly ITransactionProvider _transactionProvider;
 
-    public CompetenceController(IMapper mapper, ICompetenceService service, ITransactionProvider transactionProvider)
+    public CompetenceController(IMapper mapper, ICompetenceService service, 
+        ISubjectService subServ, ITransactionProvider transactionProvider)
     {
+        _subService = subServ;
         _mapper = mapper;
         _service = service;
         _transactionProvider = transactionProvider;
@@ -92,14 +96,14 @@ public sealed class CompetenceController : ControllerBase
     {
         // TODO
         if (string.IsNullOrWhiteSpace(request.Compentences)
-            || string.IsNullOrWhiteSpace(request.Descripton))
+            || string.IsNullOrWhiteSpace(request.Descripton)
+            || string.IsNullOrWhiteSpace(request.SubjectId))
         {
             return BadRequest();
         }
-
         using var transaction = await _transactionProvider.BeginTransaction();
-        Competence competence = await _service.AddCompetence(request.Compentences, request.Descripton);
-        await transaction.CommitAsync();
+        Competence competence = await _service.AddCompetence(request.SubjectId, request.Compentences, request.Descripton);
+        await transaction.CommitAsync();   
         return CreatedAtAction(nameof(GetById), new { id = competence.Id.ToString() }, competence);
     }
     

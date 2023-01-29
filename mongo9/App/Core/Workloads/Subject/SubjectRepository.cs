@@ -1,6 +1,9 @@
-﻿using LeoMongo.Database;
+﻿using LeoMongo;
+using LeoMongo.Database;
 using LeoMongo.Transaction;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace MongoDBDemoApp.Core.Workloads.Subject;
 
@@ -12,21 +15,22 @@ public class SubjectRepository: RepositoryBase<Subject>,ISubjectRepository
     {
     }
 
-    public override string CollectionName { get; } = default!;
+    public override string CollectionName { get; } = MongoUtil.GetCollectionName<Subject>();
     
-    public Task<Subject> AddSubject(Subject comment)
+    public async Task<Subject> AddSubject(Subject comment)
     {
-        throw new NotImplementedException();
+        return await this.InsertOneAsync(comment);
     }
 
-    public Task<Subject?> GetSubjectById(ObjectId id)
+    public async Task<Subject?> GetSubjectById(ObjectId id)
     {
-        throw new NotImplementedException();
+        var c = await Query().Where(g => g.Id == id).FirstAsync();
+        return c;
     }
 
-    public Task<IReadOnlyCollection<Subject>> GetAllSubject()
+    public async Task<IReadOnlyCollection<Subject>> GetAllSubject()
     {
-        throw new NotImplementedException();
+        return await Query().ToListAsync();
     }
 
     public Task DeleteSubject(ObjectId postId)

@@ -1,6 +1,10 @@
-﻿namespace MongoDBDemoApp.Core.Workloads.Subject;
+﻿using MongoDB.Bson;
 
-public class ISubjectService
+namespace MongoDBDemoApp.Core.Workloads.Subject;
+
+public interface ISubjectService
 {
-    
+    Task<IReadOnlyCollection<Subject>> GetAllSubjects();
+    Task<Subject?> GetSubjectById(ObjectId id);
+    Task<Subject> AddSubject(string requestName);
 }

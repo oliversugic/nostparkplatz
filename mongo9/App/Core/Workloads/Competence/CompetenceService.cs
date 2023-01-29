@@ -20,13 +20,14 @@ public class CompetenceService: ICompetenceService
     public Task<IReadOnlyCollection<Competence>> GetAllCompetences() => _repository.GetAllCompetences();
 
     public Task<Competence?> GetCompetenceById(ObjectId id) => _repository.GetCompetenceById(id);
-    public Task<Competence> AddCompetence(string name, string description)
+    public Task<Competence> AddCompetence(string id, string name, string description)
     {
-        var competence = new Competence()
-        {
-            Compentences = name,
-            Descripton = description
-        };
+        Subject.Subject s = new Subject.Subject();
+        s.Id = ObjectId.Parse(id);
+        var competence = new Competence();
+        competence.Compentences = name;
+        competence.Descripton = description;
+        competence.SubjectId = s.Id;
         return _repository.AddCompetence(competence);
     }
 
