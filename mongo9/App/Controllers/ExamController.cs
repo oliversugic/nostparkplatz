@@ -25,6 +25,7 @@ public sealed class ExamController : ControllerBase
     }
     
 
+    
     /// <summary>
     ///     Returns all exams.
     /// </summary>

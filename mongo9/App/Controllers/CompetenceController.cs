@@ -136,15 +136,15 @@ public sealed class CompetenceController : ControllerBase
     /// <summary>
     ///     Returns all competences for the post with the given id.
     /// </summary>
-    /// <param name="postId">id of an existing subject</param>
+    /// <param name="subjectId">id of an existing subject</param>
     /// <returns>List of competences, may be empty</returns>
     [HttpGet]
     [Route("getCompetenceForSubject")]
-    public async Task<ActionResult<IReadOnlyCollection<CompetenceDTO>>> GetCompetencesForSubject(string postId)
+    public async Task<ActionResult<IReadOnlyCollection<CompetenceDTO>>> GetCompetencesForSubject(string subjectId)
     {
         Subject? subject;
-        if (string.IsNullOrWhiteSpace(postId) ||
-            (subject = await _subService.GetSubjectById(new(postId))) == null)
+        if (string.IsNullOrWhiteSpace(subjectId) ||
+            (subject = await _subService.GetSubjectById(new(subjectId))) == null)
         {
             return BadRequest();
         }

@@ -15,6 +15,4 @@ public class Exam: EntityBase
     public bool PassedExam { get; set; } = default!;
     public DateTime Date { get; set; } = default!;
     public int Attempt { get; set; } = default!;
-    public List<Competence.Competence> Competence { get; set; } = default!;
-
 }

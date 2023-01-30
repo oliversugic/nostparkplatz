@@ -12,10 +12,14 @@ namespace MongoDBDemoApp.Core.Workloads.Subject;
 public class SubjectRepository: RepositoryBase<Subject>,ISubjectRepository
 {
     private readonly ICompetenceRepository _competenceRepository;
+    private readonly IDatabaseProvider _databaseProvider;
+    private IMongoCollection<TCollection> GetCollection<TCollection>(string collectionName) => this._databaseProvider.Database.GetCollection<TCollection>(collectionName);
     public SubjectRepository(ITransactionProvider transactionProvider,
         IDatabaseProvider databaseProvider, ICompetenceRepository competenceRepository) : base(transactionProvider, databaseProvider)
     {
+        _databaseProvider = databaseProvider;
         _competenceRepository = competenceRepository;
+        AddUniqueNameIndex();
     }
 
     public override string CollectionName { get; } = MongoUtil.GetCollectionName<Subject>();
@@ -62,5 +66,18 @@ public class SubjectRepository: RepositoryBase<Subject>,ISubjectRepository
                         Builders<Subject>.Update.Set(p => p.Name, subject.Name));
         Subject updated = await Query().Where(g => g.Id == subject.Id).FirstAsync();
         return updated;
+    }
+    
+    
+    private async void AddUniqueNameIndex()
+    {
+        var indexOption = new CreateIndexOptions
+        {
+            Unique = true
+        };
+        var indexKeys = Builders<Subject>.IndexKeys.Ascending(v => v.Name);
+        var indexModel = new CreateIndexModel<Subject>(indexKeys, indexOption);
+        var col = GetCollection<Subject>(CollectionName);
+        await col.Indexes.CreateOneAsync(indexModel);
     }
 }
