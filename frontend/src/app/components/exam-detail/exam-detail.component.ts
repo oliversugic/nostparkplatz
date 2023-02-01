@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Competence } from 'src/app/models/competence.model';
+import { CompetenceService } from 'src/app/services/competence.service';
 
 const URL = "<<Implement>>"
 
@@ -10,19 +12,20 @@ const URL = "<<Implement>>"
   styleUrls: ['./exam-detail.component.css']
 })
 export class ExamDetailComponent implements OnInit {
-
-  searchText:string="";
   competences:Competence[]=[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute, private compservice: CompetenceService ) {  }
 
   ngOnInit(): void {
-    this.getDetail();
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        this.getDetail(params["id"])
+      });
   }
 
-  getDetail(){
-    this.http.get(URL).subscribe((response:any) => {
-      this.competences = response.data
+  getDetail(id:string){
+    this.compservice.getCompetences(id).subscribe((data:Competence[]) => {
+      this.competences = data
     });
   }
 
