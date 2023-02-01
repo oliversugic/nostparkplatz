@@ -21,7 +21,8 @@ public sealed class MapperProfile : Profile
         CreateMap<Teacher, TeacherDTO>()
             .ForMember(p => p.Id, c => c.MapFrom(p => p.Id.ToString()));
         CreateMap<Exam, ExamDTO>()
-            .ForMember(p => p.Id, c => c.MapFrom(p => p.Id.ToString()));
+            .ForMember(p => p.Id, c => c.MapFrom(p => p.Id.ToString()))
+            .ForMember(p=> p.Subject,c => c.MapFrom(p=> p.Subject));
         CreateMap<Subject, SubjectDTO>()
             .ForMember(p => p.Id, c => c.MapFrom(p => p.Id.ToString()));
         CreateMap<Competence, CompetenceDTO>()

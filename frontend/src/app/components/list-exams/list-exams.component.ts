@@ -26,6 +26,10 @@ export class ListExamsComponent implements OnInit {
   getExams(){
     this.examservice.getExams().subscribe((data:Exam[]) => {
       this.exams = data
+      console.log(this.exams)
     });
+
+
+
   }
 }
