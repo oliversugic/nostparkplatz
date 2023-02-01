@@ -18,9 +18,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let exam of exams | searchFilter: searchText">
-                <td>{{exam.teacher.name}}</td>
-                <td>{{exam.student.name}}</td>
+            <tr *ngFor="let exam of exams">
+                <td>{{exam.teacher.firstName}} {{exam.teacher.lastName}}</td>
+                <td>{{exam.student.firstName}} {{exam.student.lastName}}</td>
                 <td>{{exam.date}}</td>
                 <td>{{exam.attempt}}</td>
                 <td><button class="btn btn-primary" [routerLink]="['/details/', exam.id]">Details</button></td>

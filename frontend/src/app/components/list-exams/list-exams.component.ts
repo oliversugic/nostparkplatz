@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Exam } from 'src/app/models/exam.model';
+import { ExamForApi } from 'src/app/models/ExamForApi.model';
+import { ExamService } from 'src/app/services/exam.service';
 
 const URL = "<<Implement>>"
 
@@ -12,18 +14,18 @@ const URL = "<<Implement>>"
 export class ListExamsComponent implements OnInit {
 
   searchText:string="";
-
   exams:Exam[]=[]
+  examForapi:ExamForApi[]=[]
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private examservice: ExamService) { }
 
   ngOnInit(): void {
     this.getExams();
   }
 
   getExams(){
-    this.http.get(URL).subscribe((response:any) => {
-      this.exams = response.data
+    this.examservice.getExams().subscribe((data:Exam[]) => {
+      this.exams = data
     });
   }
 }

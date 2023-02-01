@@ -40,12 +40,12 @@ public class ExamService : IExamService
         Subject.Subject? subject = await _subRep.GetSubjectById(ObjectId.Parse(requestSubjectId));
         Exam exam = new Exam()
         {
-            StudentId = ObjectId.Parse(requestStudentId),
-            SubjectId = ObjectId.Parse(requestSubjectId),
-            TeacherId= ObjectId.Parse(requestTeacherId),
-            //Student = student!,
-            //Teacher = teacher!,
-            //Subject = subject!,
+            //StudentId = ObjectId.Parse(requestStudentId),
+            //SubjectId = ObjectId.Parse(requestSubjectId),
+            //TeacherId= ObjectId.Parse(requestTeacherId),
+            Student = student!,
+            Teacher = teacher!,
+            Subject = subject!,
             Attempt = requestAttempt,
             Date = requestDate,
             PassedExam = requestPassedExam,
