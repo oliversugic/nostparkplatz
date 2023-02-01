@@ -5,14 +5,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Competences</th>
+            <th>Subject</th>
+            <th>ComeptenceName</th>
             <th>Subject</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let comp of competences">
+            <td>{{comp.subjectId.name}}</td>
+            <td>{{comp.compentences}}</td>
             <td>{{comp.description}}</td>
-            <td>{{comp.subject.name}}</td>
         </tr>
     </tbody>
 </table>
