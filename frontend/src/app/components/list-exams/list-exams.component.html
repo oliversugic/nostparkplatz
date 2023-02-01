@@ -23,7 +23,7 @@
                 <td>{{exam.student.firstName}} {{exam.student.lastName}}</td>
                 <td>{{exam.date}}</td>
                 <td>{{exam.attempt}}</td>
-                <td><button class="btn btn-primary" [routerLink]="['/details/', exam.id]">Details</button></td>
+                <td><button class="btn btn-primary" [routerLink]="['/details/', exam.subject.id]">Details</button></td>
             </tr>
         </tbody>
     </table>

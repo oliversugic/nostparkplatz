@@ -1,9 +1,5 @@
 <div class="container justify-content-center" style="display: flex;">
-    <h1>Deatil</h1>
-</div>
-
-<div class="m-3">
-    <input placeholder="Prüfung suchen" type="text" class="form-control search-field" [(ngModel)]="searchText">
+    <h1>Detail</h1>
 </div>
 
 <table class="table">
@@ -14,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let comp of competences | searchFilter: searchText">
+        <tr *ngFor="let comp of competences">
             <td>{{comp.description}}</td>
             <td>{{comp.subject.name}}</td>
         </tr>
