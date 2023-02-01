@@ -1,1 +1,44 @@
-<p>Registration</p>
+<br>
+<div class="container halfside">
+    <div class="modal-header bg-primary text-white rounded">
+        <h4 class="modal-title">Create Exam</h4>
+    </div>
+    <br>
+    <form (ngSubmit)="onSubmit(examForm)" #examForm="ngForm">
+        <div>
+            <label>Choose Teacher</label>
+            <br>
+            <select class="form-control validateable" [(ngModel)]="teacherAdd" 
+            #type="ngModel" required>
+                <option *ngFor="let type of teachers" [ngValue]="type">
+                  {{type.firstName}} {{type.lastName}}
+                </option>
+            </select>
+            <div *ngIf="type.errors?.['required']" class="alert alert-danger">
+                Choose a teacher
+            </div>
+        </div>
+        <br>
+        <div>
+            <label>Choose Student</label>
+            <br>
+            <select class="form-control validateable" [(ngModel)]="studentAdd" 
+            #data="ngModel" required>
+                <option *ngFor="let data of students" [ngValue]="data">
+                  {{data.firstName}} {{data.lastName}}
+                </option>
+            </select>
+            <div *ngIf="data.errors?.['required']" class="alert alert-danger">
+                Choose a student
+            </div>
+        </div>
+        <br>
+        <!---div class="modal-footer">
+            <button type="submit" class="btn btn-primary"
+            [disabled]="(!examForm.form.valid)">Create Exam Attempt</button>
+        <button type="submit" class="btn btn-primary borderButton">
+            Zurück
+        </button>
+        </div--->
+    </form>
+</div>
