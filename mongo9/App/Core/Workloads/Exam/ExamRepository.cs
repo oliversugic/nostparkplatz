@@ -4,6 +4,7 @@ using LeoMongo.Transaction;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using MongoDBDemoApp.Model.Exam;
 
 
 namespace MongoDBDemoApp.Core.Workloads.Exam;
@@ -38,4 +39,13 @@ public sealed class ExamRepository : RepositoryBase<Exam>, IExamRepository
         return Query().ToListAsync();
     }
 
+    public async Task<IReadOnlyCollection<MostParkingLots>> GetParkingLots()
+    {
+        return await Query().GroupBy(z=>z.Student.Id).Select(g => new MostParkingLots
+        {
+            studentId = g.Key.ToString(),
+            parkingLots = g.Count(e => e.Attempt==3 && e.PassedExam==false)
+        })
+            .ToListAsync();
+    }
 }

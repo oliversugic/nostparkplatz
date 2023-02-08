@@ -41,6 +41,19 @@ public sealed class ExamController : ControllerBase
     }
     
     /// <summary>
+    ///     Returns all student with parking lots.
+    /// </summary>
+    /// <returns>studentId with parking lots</returns>
+    [HttpGet]
+    [Route("getParkingLots")]
+    public async Task<ActionResult<IReadOnlyCollection<MostParkingLots>>> GetParkingLots()
+    {
+        IReadOnlyCollection<MostParkingLots> parkingLots = await _service.GetAllParkingLots();
+        return Ok(_mapper.Map<List<MostParkingLots>>(parkingLots));
+    }
+    
+    
+    /// <summary>
     ///     Sets Test Data.
     /// </summary>
     /// <returns></returns>

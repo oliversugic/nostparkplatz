@@ -3,6 +3,7 @@ using MongoDBDemoApp.Core.Util;
 using MongoDBDemoApp.Core.Workloads.Student;
 using MongoDBDemoApp.Core.Workloads.Subject;
 using MongoDBDemoApp.Core.Workloads.Teacher;
+using MongoDBDemoApp.Model.Exam;
 using ZstdSharp.Unsafe;
 
 namespace MongoDBDemoApp.Core.Workloads.Exam;
@@ -52,5 +53,10 @@ public class ExamService : IExamService
             Grade = requestGrade
         };
         return await _repository.AddExam(exam);
+    }
+
+    public async Task<IReadOnlyCollection<MostParkingLots>> GetAllParkingLots()
+    {
+        return await _repository.GetParkingLots();
     }
 }
