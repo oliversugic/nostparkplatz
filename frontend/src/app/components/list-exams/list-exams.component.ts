@@ -29,9 +29,7 @@ export class ListExamsComponent implements OnInit {
     });
   }
   setTestData(){
-    this.examservice.addTestData().subscribe((data:any)=>{
-      console.log("soit geh");
-      
-    })
+    this.examservice.addTestData().subscribe((data:any)=>{      
+    });
   }
 }

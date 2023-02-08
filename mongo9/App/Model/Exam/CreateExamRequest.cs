@@ -2,11 +2,9 @@
 
 public class CreateExamRequest
 {
-    public string TeacherId { get; set; } = default!;
-    public string StudentId { get; set; } = default!;
-    public string SubjectId { get; set; } = default!;
-    public int Grade { get; set; } = default!;
-    public bool PassedExam { get; set; } = default!;
-    public DateTime Date { get; set; } = default!;
-    public int Attempt { get; set; } = default!;
+    public string studentId { get; set; } = default!;
+    public string teacherId { get; set; } = default!;
+    public string subjectId { get; set; } = default!;
+    public DateTime date { get; set; } = default!;
+    public int attempt { get; set; } = default!;
 }

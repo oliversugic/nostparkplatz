@@ -8,9 +8,9 @@
         <div>
             <label>Select Teacher</label>
             <br>
-            <select class="form-control validateable" [(ngModel)]="teacherAdd" 
-            #type="ngModel" required>
-                <option *ngFor="let type of teachers" [ngValue]="type">
+            <select class="form-control validateable" [(ngModel)]="e.teacherId" 
+            #type="ngModel" required [ngModelOptions]="{standalone:true}">
+                <option *ngFor="let type of teachers" [ngValue]="type.id">
                   {{type.firstName}} {{type.lastName}}
                 </option>
             </select>
@@ -22,9 +22,9 @@
         <div>
             <label>Select Student</label>
             <br>
-            <select class="form-control validateable" [(ngModel)]="studentAdd" 
-            #data="ngModel" required>
-                <option *ngFor="let data of students" [ngValue]="data">
+            <select class="form-control validateable" [(ngModel)]="e.studentId" 
+            #data="ngModel" required [ngModelOptions]="{standalone:true}">
+                <option *ngFor="let data of students" [ngValue]="data.id">
                   {{data.firstName}} {{data.lastName}}
                 </option>
             </select>
@@ -36,28 +36,44 @@
         <div>
             <label>Select Subject</label>
             <br>
-            <select class="form-control validateable" [(ngModel)]="subjectAdd" 
-            #data="ngModel" required>
-                <option *ngFor="let data of subjects" [ngValue]="data">
-                  {{data.name}}
+            <select class="form-control validateable" [(ngModel)]="e.subjectId" 
+            #sub="ngModel" required [ngModelOptions]="{standalone:true}">
+                <option *ngFor="let sub of subjects" [ngValue]="sub.id">
+                  {{sub.name}}
                 </option>
             </select>
-            <div *ngIf="data.errors?.['required']" class="alert alert-danger">
+            <div *ngIf="sub.errors?.['required']" class="alert alert-danger">
                 Select a Subject
             </div>
         </div>
         <br>
-        <!--Implement Date-->
+        <div>
+            <label>Select Date</label>
+            <br>
+            <select class="form-control validateable" [(ngModel)]="e.date" 
+            #data="ngModel" required [ngModelOptions]="{standalone:true}">
+                <option *ngFor="let data of dates" [ngValue]="data">
+                  {{data | date: 'fullDate'}}
+                </option>
+            </select>
+            <div *ngIf="data.errors?.['required']" class="alert alert-danger">
+                Select a Date
+            </div>
+        </div>
         <br>
         <label>Select Attempt</label>
         <fieldset>
-            <label class="me-3"><input type="radio" name="attemptNr" value="1" [(ngModel)]="attemptNr">1st Try</label>
-            <label class="me-3"><input type="radio" name="attemptNr" value="2" [(ngModel)]="attemptNr">1. Repetition</label>
-            <label class="me-3"><input type="radio" name="attemptNr" value="3" [(ngModel)]="attemptNr">2. Repetition</label>
-            <p>{{attemptNr}}</p>
+            <label class="me-3"><input type="radio" name="attemptNr" value="1" [(ngModel)]="e.attempt" [ngModelOptions]="{standalone:true}">1st Try</label>
+            <label class="me-3"><input type="radio" name="attemptNr" value="2" [(ngModel)]="e.attempt" [ngModelOptions]="{standalone:true}">1. Repetition</label>
+            <label class="me-3"><input type="radio" name="attemptNr" value="3" [(ngModel)]="e.attempt" [ngModelOptions]="{standalone:true}">2. Repetition</label>
         </fieldset>
     </form>
+    <div>
+        <textarea>{{e.studentId}} teacherId:{{e.teacherId}} attempt:{{e.attempt}}
+            subjectId:{{e.subjectId}} date:{{e.date}}
+        </textarea>
+    </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" [disabled]="(!examForm.form.valid)">Register Nost</button>
+        <button type="submit" (click)="navigateToHome()" class="btn btn-primary">Register Nost</button>
     </div>
 </div>

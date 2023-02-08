@@ -1,20 +1,21 @@
-<div class="container justify-content-center" style="display: flex;">
-    <h1>Detail</h1>
+<div class="container">
+    <div class="container justify-content-center" style="display: flex;">
+        <h1>Detail</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>ComeptenceName</th>
+                <th>CompetenceDescription</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let comp of competences">
+                <td>{{comp.subjectId.name}}</td>
+                <td>{{comp.compentences}}</td>
+                <td>{{comp.description}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Subject</th>
-            <th>ComeptenceName</th>
-            <th>CompetenceDescription</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let comp of competences">
-            <td>{{comp.subjectId.name}}</td>
-            <td>{{comp.compentences}}</td>
-            <td>{{comp.description}}</td>
-        </tr>
-    </tbody>
-</table>

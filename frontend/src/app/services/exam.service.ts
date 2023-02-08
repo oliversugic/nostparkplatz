@@ -1,17 +1,25 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ExamDTO } from '../models/exam-dto';
 import { Exam } from '../models/exam.model';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({
+  'Content-Type': 'application/json'
+  //,'Authorization': 'my-auth-token'
+  })
+  }
 @Injectable({
   providedIn: 'root'
 })
 export class ExamService {
-  postExam(studentAdd:any, teacherAdd:any, subjectAdd:any, dateOfExam:any, attemptNr:any) {
-    throw new Error('Method not implemented.');
-  }
-
   devurl = "http://localhost:5000/api/Exam/";
   constructor(private http: HttpClient) { }
+
+  postExam(e:ExamDTO) {
+    return this.http.post(this.devurl, e, httpOptions);
+  }
 
   getExams() {
     return this.http.get<Exam[]>(this.devurl+"all");

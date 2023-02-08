@@ -106,6 +106,8 @@ public sealed class ExamController : ControllerBase
         return Ok(_mapper.Map<ExamDTO>(exam));
     }
 
+    
+    
     /// <summary>
     ///     Creates a new exam.
     /// </summary>
@@ -115,19 +117,18 @@ public sealed class ExamController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateExamRequest request)
     {
         // TODO
-        if (string.IsNullOrWhiteSpace(request.SubjectId)
-            || string.IsNullOrWhiteSpace(request.Attempt.ToString())
-            || string.IsNullOrWhiteSpace(request.Date.ToString())
-            || string.IsNullOrWhiteSpace(request.Grade.ToString())
-            || string.IsNullOrWhiteSpace(request.StudentId)
-            || string.IsNullOrWhiteSpace(request.TeacherId)
-            || string.IsNullOrWhiteSpace(request.PassedExam.ToString()))
+        if (string.IsNullOrWhiteSpace(request.studentId)
+            || string.IsNullOrWhiteSpace(request.teacherId)
+            || string.IsNullOrWhiteSpace(request.subjectId)
+            || string.IsNullOrWhiteSpace(request.date.ToString())
+            || string.IsNullOrWhiteSpace(request.attempt.ToString())
+            )
         {
             return BadRequest();
         }
         using var transaction = await _transactionProvider.BeginTransaction();
-        Exam exam = await _service.AddExam(request.PassedExam, request.Attempt,request.Date, request.Grade,
-           request.StudentId, request.TeacherId, request.SubjectId);
+        Exam exam = await _service.AddExam(false, request.attempt, request.date, 5,
+           request.studentId, request.teacherId, request.subjectId);
         await transaction.CommitAsync();   
         return CreatedAtAction(nameof(GetById), new { id = exam.Id.ToString() }, exam);
     }
