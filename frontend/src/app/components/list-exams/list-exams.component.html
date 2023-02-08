@@ -14,6 +14,7 @@
                 <th>Student</th>
                 <th>Date</th>
                 <th>Attempt Nr.</th>
+                <th>Grade</th>
                 <th>Details</th>
             </tr>
         </thead>
@@ -21,8 +22,9 @@
             <tr *ngFor="let exam of exams">
                 <td>{{exam.teacher.firstName}} {{exam.teacher.lastName}}</td>
                 <td>{{exam.student.firstName}} {{exam.student.lastName}}</td>
-                <td>{{exam.date}}</td>
+                <td>{{exam.date | date: 'fullDate'}}</td>
                 <td>{{exam.attempt}}</td>
+                <td>{{exam.grade}}</td>
                 <td><button class="btn btn-primary" [routerLink]="['/details/', exam.subject.id]">Details</button></td>
             </tr>
         </tbody>

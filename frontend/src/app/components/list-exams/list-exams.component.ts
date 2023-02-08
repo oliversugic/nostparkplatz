@@ -18,6 +18,7 @@ export class ListExamsComponent implements OnInit {
   constructor(private http: HttpClient,private examservice: ExamService) { }
 
   ngOnInit(): void {
+    this.setTestData();
     this.getExams();
   }
 
@@ -26,8 +27,11 @@ export class ListExamsComponent implements OnInit {
       this.exams = data
       console.log(this.exams)
     });
-
-
-
+  }
+  setTestData(){
+    this.examservice.addTestData().subscribe((data:any)=>{
+      console.log("soit geh");
+      
+    })
   }
 }

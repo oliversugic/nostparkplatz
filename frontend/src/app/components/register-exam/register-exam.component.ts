@@ -45,6 +45,7 @@ export class RegisterExamComponent implements OnInit {
   }
   onSubmit(examForm: NgForm) {
     if (examForm.valid) {
+      
     }
   }
 }
