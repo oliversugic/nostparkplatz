@@ -12,4 +12,8 @@ export class SubjectService {
   getSubjectById(id:String){
     return this.http.get<Subject>(`http://localhost:5000/api/Subject?id=`+id);
   }
+
+  getSubjects() {
+    return this.http.get<Subject[]>('http://localhost:5000/api/Subject/all');
+  }
 }

@@ -18,7 +18,7 @@ export class ExamDetailComponent implements OnInit {
   competences:Competence[]=[];
   competenceDtos:CompetenceDTO[]=[];
   subjectToAdd :Subject={
-    id: '',
+    id: 0,
     name: ''
   };
 
@@ -39,7 +39,7 @@ export class ExamDetailComponent implements OnInit {
         const competenceToAdd:Competence={
           id: 0,
           subjectId: {
-            id: '',
+            id: 0,
             name: ''
           },
           description: '',

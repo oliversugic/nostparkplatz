@@ -1,12 +1,12 @@
 <br>
 <div class="container halfside">
-    <div class="modal-header bg-primary text-white rounded">
-        <h4 class="modal-title">Create Exam</h4>
+    <div class="modal-header rounded">
+        <h4 class="modal-title">Register for Nost</h4>
     </div>
     <br>
     <form (ngSubmit)="onSubmit(examForm)" #examForm="ngForm">
         <div>
-            <label>Choose Teacher</label>
+            <label>Select Teacher</label>
             <br>
             <select class="form-control validateable" [(ngModel)]="teacherAdd" 
             #type="ngModel" required>
@@ -15,12 +15,12 @@
                 </option>
             </select>
             <div *ngIf="type.errors?.['required']" class="alert alert-danger">
-                Choose a teacher
+                Select a Teacher
             </div>
         </div>
         <br>
         <div>
-            <label>Choose Student</label>
+            <label>Select Student</label>
             <br>
             <select class="form-control validateable" [(ngModel)]="studentAdd" 
             #data="ngModel" required>
@@ -29,16 +29,35 @@
                 </option>
             </select>
             <div *ngIf="data.errors?.['required']" class="alert alert-danger">
-                Choose a student
+                Select a Student
             </div>
         </div>
         <br>
-        <!---div class="modal-footer">
-            <button type="submit" class="btn btn-primary"
-            [disabled]="(!examForm.form.valid)">Create Exam Attempt</button>
-        <button type="submit" class="btn btn-primary borderButton">
-            Zurück
-        </button>
-        </div--->
+        <div>
+            <label>Select Subject</label>
+            <br>
+            <select class="form-control validateable" [(ngModel)]="subjectAdd" 
+            #data="ngModel" required>
+                <option *ngFor="let data of subjects" [ngValue]="data">
+                  {{data.name}}
+                </option>
+            </select>
+            <div *ngIf="data.errors?.['required']" class="alert alert-danger">
+                Select a Subject
+            </div>
+        </div>
+        <br>
+        <!--Implement Date-->
+        <br>
+        <label>Select Attempt</label>
+        <fieldset>
+            <label class="me-3"><input type="radio" name="attemptNr" value="1" [(ngModel)]="attemptNr">1st Try</label>
+            <label class="me-3"><input type="radio" name="attemptNr" value="2" [(ngModel)]="attemptNr">1. Repetition</label>
+            <label class="me-3"><input type="radio" name="attemptNr" value="3" [(ngModel)]="attemptNr">2. Repetition</label>
+            <p>{{attemptNr}}</p>
+        </fieldset>
     </form>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="(!examForm.form.valid)">Register Nost</button>
+    </div>
 </div>
