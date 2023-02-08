@@ -43,9 +43,9 @@ public sealed class ExamRepository : RepositoryBase<Exam>, IExamRepository
     {
         return await Query().GroupBy(z=>z.Student.Id).Select(g => new MostParkingLots
         {
-            studentId = g.Key.ToString(),
+            studentId = g.First().Student.FirstName + " " + g.First().Student.LastName,
             parkingLots = g.Count(e => e.Attempt==3 && e.PassedExam==false)
-        })
+        }).OrderByDescending(tt=>tt.parkingLots)
             .ToListAsync();
     }
 }

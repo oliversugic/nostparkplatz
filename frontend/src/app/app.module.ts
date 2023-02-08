@@ -10,6 +10,7 @@ import { ListExamsComponent } from './components/list-exams/list-exams.component
 import { RegisterExamComponent } from './components/register-exam/register-exam.component';
 
 import { SearchFilterPipe } from "./../search-filter.pipe";
+import { ListParkingLotsComponent } from './components/list-parking-lots/list-parking-lots.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SearchFilterPipe } from "./../search-filter.pipe";
     RegisterExamComponent,
     ExamDetailComponent,
     ListExamsComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    ListParkingLotsComponent
   ],
   imports: [
     BrowserModule,

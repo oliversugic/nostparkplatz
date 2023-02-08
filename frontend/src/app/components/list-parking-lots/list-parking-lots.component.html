@@ -1,0 +1,18 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Student</td>
+                <td>Parking Lots</td>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of parkingLots">
+                <tr>
+                    <td>{{item.studentId}}</td>
+                    <td>{{item.parkingLots}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
