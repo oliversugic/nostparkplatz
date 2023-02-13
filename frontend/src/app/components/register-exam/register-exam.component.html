@@ -1,7 +1,7 @@
 <br>
 <div class="container halfside">
     <div class="modal-header rounded">
-        <h4 class="modal-title">Register for Nost</h4>
+        <h2 class="modal-title">Register for Nost</h2>
     </div>
     <br>
     <form (ngSubmit)="onSubmit(examForm)" #examForm="ngForm">
@@ -68,11 +68,6 @@
             <label class="me-3"><input type="radio" name="attemptNr" value="3" [(ngModel)]="e.attempt" [ngModelOptions]="{standalone:true}">2. Repetition</label>
         </fieldset>
     </form>
-    <div>
-        <textarea>{{e.studentId}} teacherId:{{e.teacherId}} attempt:{{e.attempt}}
-            subjectId:{{e.subjectId}} date:{{e.date}}
-        </textarea>
-    </div>
     <div class="modal-footer">
         <button type="submit" (click)="navigateToHome()" class="btn btn-primary">Register Nost</button>
     </div>
