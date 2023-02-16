@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,6 +11,7 @@ import { ExamService } from 'src/app/services/exam.service';
 import { StudentService } from 'src/app/services/student.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { TeacherService } from 'src/app/services/teacher.service';
+import { ListExamsComponent } from '../list-exams/list-exams.component';
 
 @Component({
   selector: 'app-register-exam',
@@ -50,7 +52,8 @@ export class RegisterExamComponent implements OnInit {
     private teacherService:TeacherService,
     private studentService:StudentService,
     private subjectService:SubjectService,
-    private examservice:ExamService) { }
+    private examservice:ExamService,
+    private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getTeachers();
@@ -82,6 +85,8 @@ export class RegisterExamComponent implements OnInit {
   }
   navigateToHome(){
     this.examservice.postExam(this.e).subscribe((data:any)=>{});
+    let myCompOneObj = new ListExamsComponent(this.http,this.examservice);
+    myCompOneObj.getExams();
     this.router.navigate(['home']);
   }
 }
