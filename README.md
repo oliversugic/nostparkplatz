@@ -1,4 +1,4 @@
-# Nost Prüfung Verwaltung - Pelzeder Sugic Binder Tran Plakolb
+# Nost Prüfung Verwaltung - Pelzeder Sugic Binder Tran
 
 ## Modell
 
